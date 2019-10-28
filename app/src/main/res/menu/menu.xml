@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_search_view"
+        android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/scan_button"
+
+        android:orderInCategory="100"
+        android:title="扫描"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/setting_button"
+
+        android:orderInCategory="100"
+        android:title="设置"
+        app:showAsAction="ifRoom" />
+</menu>
+   <!-- android:icon="@mipmap/navigation_icon_sweep"-->
+    <!--  android:icon="@mipmap/titlebar_icon_settings_normal"-->
