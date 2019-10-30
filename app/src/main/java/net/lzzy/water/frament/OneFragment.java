@@ -85,7 +85,10 @@ public class OneFragment extends BaseFragment {
         }
         intiView();
         showCategory();
-        getProducts(categories.get(0).getId());
+        String cid = categories.get(0).getId();
+        if (cid !=null){
+            getProducts(cid);
+        }
         hList.setOnItemClickListener((adapterView, view, i, l) -> {
             Category category = adapter.getItem(i);
             if (category != null) {
@@ -111,8 +114,6 @@ public class OneFragment extends BaseFragment {
             }).start();*/
 
         });
-
-
     }
 
     private void getProducts(String cid) {

@@ -2,14 +2,15 @@ package net.lzzy.water.network;
 
 import net.lzzy.sqllib.JsonConverter;
 import net.lzzy.water.constants.ApiConstants;
-import net.lzzy.water.models.Category;
 import net.lzzy.water.models.User;
 
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.List;
 
+/**
+ * @author 菜鸡
+ */
 public class UserService {
     public static String getUserFromServer(User user) throws JSONException, IOException {
         String address= ApiConstants.LOGIN_USER;

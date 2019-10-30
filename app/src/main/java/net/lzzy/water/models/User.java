@@ -110,6 +110,6 @@ public class User implements Jsonable {
         telephone = object.getString("telephone");
         role = object.getString("role");
         birthday = object.getString("birthday");
-        address = object.getString("address");
+       // address = object.getString("address");
     }
 }

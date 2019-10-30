@@ -13,10 +13,12 @@
             android:layout_width="15dp"
             android:layout_height="match_parent"/>
         <ImageView
+            android:id="@+id/own_view_head"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/scan"/>
         <TextView
+            android:id="@+id/own_view_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -27,6 +29,7 @@
         android:layout_height="0.5dp"
         android:background="#cccccc"/>
     <LinearLayout
+        android:id="@+id/own_view_favorite"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:gravity="center_vertical"
@@ -65,9 +68,10 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="8dp"
         android:background="#cccccc"/>
     <LinearLayout
+        android:id="@+id/own_view_order"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:gravity="center_vertical"
@@ -100,10 +104,12 @@
         android:layout_height="50dp"
         android:orientation="horizontal">
         <FrameLayout
+            android:id="@+id/own_view_a"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/own_view_tvCount1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -126,48 +132,12 @@
             </LinearLayout>
         </FrameLayout>
         <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:src="@drawable/a"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="待发货"/>
-            </LinearLayout>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:src="@drawable/a"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="待收货"/>
-            </LinearLayout>
-        </FrameLayout>
-        <FrameLayout
+            android:id="@+id/own_view_b"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/own_view_tvCount2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -180,7 +150,61 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:src="@drawable/a"/>
+                    android:src="@drawable/b"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:text="待发货"/>
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/own_view_c"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/own_view_tvCount3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/colorAccent"
+                android:text="2"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/c"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:text="待收货"/>
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/own_view_d"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/own_view_tvCount4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/colorAccent"
+                android:text="2"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/d"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -189,9 +213,17 @@
             </LinearLayout>
         </FrameLayout>
         <FrameLayout
+            android:id="@+id/own_view_e"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/own_view_tvCount5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/colorAccent"
+                android:text="2"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -199,7 +231,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:src="@drawable/a"/>
+                    android:src="@drawable/e"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
