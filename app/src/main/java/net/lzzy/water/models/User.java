@@ -87,11 +87,18 @@ public class User implements Jsonable {
         this.role = role;
     }
 //endregion
+
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         json.put("password",password);
         json.put("telephone",telephone);
+        json.put("uid",uid);
+        json.put("username",username);
+        json.put("headImage",headImage);
+        json.put("address",address);
+        json.put("birthday",birthday);
+        json.put("role",role);
         return json;
     }
 

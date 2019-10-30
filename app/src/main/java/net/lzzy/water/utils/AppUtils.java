@@ -10,6 +10,9 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.util.Pair;
 
+import net.lzzy.water.frament.OwnFragment;
+import net.lzzy.water.models.User;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
@@ -36,13 +39,25 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2019/3/11
  * Description:
  */
-public class AppUtils extends Application {
+public class AppUtils extends Application implements OwnFragment.OnGoToLogin {
     public static final String URL_ID = "url";
     public static final String URL_PORT = "urlPort";
     public static final String SP_SETTING = "spSetting";
     private static WeakReference<Context> wContext;
     private static List<Activity> activities = new LinkedList<>();
     private static String runningActivity;
+
+
+    private static User user;
+
+    public static User getUser(){
+       return user;
+    }
+    public static User setUser(User date){
+        user = new User();
+        user = date;
+        return user;
+    }
 
     @Override
     public void onCreate() {
@@ -227,5 +242,10 @@ public class AppUtils extends Application {
         String result = format.format(today);
         Log.e(null, result);
         return result;
+    }
+
+    @Override
+    public void OnGoToLogin(User date) {
+        user = date;
     }
 }

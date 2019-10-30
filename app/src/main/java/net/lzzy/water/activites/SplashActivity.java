@@ -119,7 +119,6 @@ public class SplashActivity extends AppCompatActivity {
     public  void  getCategory(){
        try {
                 String json = CategoryService.getCategoryFromServer();
-           System.out.println(json);
                 handler.sendMessage(handler.obtainMessage(WHAT_CATEGORY, json));
        } catch (IOException e) {
                 handler.sendMessage(handler.obtainMessage(WHAT_C_EXCEPTION, e.getMessage()));

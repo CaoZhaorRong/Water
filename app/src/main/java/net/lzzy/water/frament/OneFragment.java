@@ -1,9 +1,11 @@
 package net.lzzy.water.frament;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Parcelable;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -44,6 +46,7 @@ public class OneFragment extends BaseFragment {
     private static final String ARG_CATEGORIES_RESULT = "argCategoriesResult";
     private static final int WHAT_PRODUCT = 0;
     private static final int WHAT_P_EXCEPTION = 1;
+    public static final int INT = 9;
     private List<Category> categories;
     private GenericAdapter<Category> adapter;
     private GenericAdapter<Product> gvAdapter;
@@ -73,8 +76,13 @@ public class OneFragment extends BaseFragment {
 
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     @Override
     protected void populate() {
+        if (android.os.Build.VERSION.SDK_INT > INT) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         intiView();
         showCategory();
         getProducts(categories.get(0).getId());
@@ -83,22 +91,34 @@ public class OneFragment extends BaseFragment {
             if (category != null) {
                 getProducts(category.getId());
             }
-            User user =new User();
-            user.setPassword("1");
-            user.setTelephone("15277979884");
-            try {
-                String json = UserService.getUserFromServer(user);
-                System.out.println(json);
-            } catch (Exception e) {
-            }
+
+           /* new Thread(() -> {
+                User user =new User();
+                user.setPassword("1");
+                user.setAddress("12");
+                user.setBirthday("12");
+                user.setHeadImage("12");
+                user.setRole("User");
+                user.setUid("12");
+                user.setUsername("12");
+                user.setTelephone("15277979884");
+                try {
+                    String json = UserService.getUserFromServer(user);
+                    System.out.println(json);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }).start();*/
+
         });
+
+
     }
 
     private void getProducts(String cid) {
         executor.execute(() -> {
             try {
                 String json = ProductService.getProductFromServer(cid);
-                System.out.println(json);
                 handler.sendMessage(handler.obtainMessage(WHAT_PRODUCT, json));
             } catch (IOException e) {
                 handler.sendMessage(handler.obtainMessage(WHAT_P_EXCEPTION, e.getMessage()));

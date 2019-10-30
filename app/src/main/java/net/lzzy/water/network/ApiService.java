@@ -167,7 +167,12 @@ public class ApiService {
                 .post(requestBody)
                 .build();
         try(Response response = CLIENT.newCall(request).execute()){
-            return response.body().string();
+            if (response.isSuccessful()) {
+                assert response.body() != null;
+                return response.body().string();
+            } else {
+                throw new IOException("错误码：" + response.code());
+            }
         }
     }
 }

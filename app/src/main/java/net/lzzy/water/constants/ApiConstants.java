@@ -17,7 +17,6 @@ public class ApiConstants {
 
     public static final String SPLASH_PRODUCT =NET+"api/getProductBy/";
     public  static final String KEY_PRODUCTS = "products";
-
     public static final String LOGIN_USER =NET.concat("api/user_login");
     public  static final String KEY_USER = "user";
 }
