@@ -84,17 +84,20 @@ public class BuyFragment extends BaseFragment {
     private void showBanner() {
         List<String> title = new ArrayList<>();
         List<String> images = new ArrayList<>();
-        for (Image p:product.getpImage()){
-            images.add(ApiConstants.NET+p.getImage());
+        if (product.getpImage()!=null){
+            for (Image p:product.getpImage()){
+                images.add(ApiConstants.NET+p.getImage());
+            }
+            images.add(String.valueOf(R.drawable.info));
+            banner.setImageLoader(new MyLoader());
+            banner.setImages(images);
+            banner.setBannerAnimation(Transformer.Default);
+            banner.setDelayTime(2000);
+            banner.isAutoPlay(true);
+            banner.setIndicatorGravity(BannerConfig.CENTER);
+            banner.start();
         }
-        images.add(String.valueOf(R.drawable.info));
-        banner.setImageLoader(new MyLoader());
-        banner.setImages(images);
-        banner.setBannerAnimation(Transformer.Default);
-        banner.setDelayTime(2000);
-        banner.isAutoPlay(true);
-        banner.setIndicatorGravity(BannerConfig.CENTER);
-        banner.start();
+
     }
 
     private void intiView() {

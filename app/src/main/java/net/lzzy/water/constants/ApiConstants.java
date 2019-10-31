@@ -21,6 +21,7 @@ public class ApiConstants {
     public static final String LOGIN_USER =NET.concat("api/user_login");
     public  static final String KEY_USER = "user";
 
-    public static final String GET_ORDER =NET.concat("api/getOrders/");
+    public static final String GET_ORDER =NET.concat("api/getOrders/user=");
+    public static final String GET_ORDER_STATE ="&state=";
     public  static final String KEY_ORDER = "orders";
 }

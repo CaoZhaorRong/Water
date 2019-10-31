@@ -15,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import net.lzzy.water.R;
+import net.lzzy.water.constants.ApiConstants;
 import net.lzzy.water.models.Order;
 import net.lzzy.water.models.User;
 import net.lzzy.water.network.OrderService;
@@ -30,6 +33,9 @@ import java.util.Objects;
 import java.util.concurrent.ThreadPoolExecutor;
 
 
+/**
+ * @author 菜鸡
+ */
 public class OwnFragment extends BaseFragment {
     public static final int WHAT_A = 1;
     public static final int WHAT_B = 2;
@@ -53,6 +59,7 @@ public class OwnFragment extends BaseFragment {
     private TextView tvCount3;
     private TextView tvCount4;
     private TextView tvCount5;
+    private List<Order> o1;
 
     public OwnFragment() {
     }
@@ -74,10 +81,10 @@ public class OwnFragment extends BaseFragment {
                 case  WHAT_A:
                     String json1 = String.valueOf(msg.obj);
                     try {
-                        List<Order> o1 = OrderService.getOrders(json1);
-                        fragment.tvCount1.setText(o1.size());
+                         fragment.o1 = OrderService.getOrders(json1);
                     } catch (Exception e) {
                         e.printStackTrace();
+
                     }
                     break;
                /* case  WHAT_B:
@@ -124,14 +131,15 @@ public class OwnFragment extends BaseFragment {
 
     @Override
     protected void populate() {
-        user = AppUtils.getUser();
         intiView();
+        user = AppUtils.getUser();
             //在执行 show() 和 hide() 方法的时候，会回调一个方法
         if (user!=null){
             tvName.setText(user.getUsername());
+            Picasso.get().load(ApiConstants.NET+user.getHeadImage()).into(ivHead);
             executor.execute(() ->{
                 try {
-                    String json1 = OrderService.getOrderFromServer(0);
+                    String json1 = OrderService.getOrderFromServer(user.getUid(),0);
                    /* String json2 = OrderService.getOrderFromServer(1);
                     String json3 = OrderService.getOrderFromServer(2);
                     String json4 = OrderService.getOrderFromServer(3);
@@ -145,12 +153,15 @@ public class OwnFragment extends BaseFragment {
                     handler.sendMessage(handler.obtainMessage(WHAT_O_EXCEPTION, e.getMessage()));
                 }
             });
+
         }
+
     }
 
     private void intiView() {
         ivHead = findViewById(R.id.own_view_head);
         tvName = findViewById(R.id.own_view_name);
+
         viewFavorite = findViewById(R.id.own_view_favorite);
         viewOrder = findViewById(R.id.own_view_order);
         view1 = findViewById(R.id.own_view_a);
@@ -159,6 +170,7 @@ public class OwnFragment extends BaseFragment {
         view4 = findViewById(R.id.own_view_d);
         view5 = findViewById(R.id.own_view_e);
         tvCount1 = findViewById(R.id.own_view_tvCount1);
+      //  tvCount1.setText(o1.size());
         tvCount2 = findViewById(R.id.own_view_tvCount2);
         tvCount3 = findViewById(R.id.own_view_tvCount3);
         tvCount4 = findViewById(R.id.own_view_tvCount4);

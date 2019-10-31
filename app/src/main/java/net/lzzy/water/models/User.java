@@ -5,6 +5,9 @@ import net.lzzy.sqllib.Jsonable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author 菜鸡
+ */
 public class User implements Jsonable {
     private String uid;
     //编号
@@ -91,6 +94,7 @@ public class User implements Jsonable {
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
+        json.put("uid",uid);
         json.put("password",password);
         json.put("telephone",telephone);
         json.put("uid",uid);
@@ -110,6 +114,7 @@ public class User implements Jsonable {
         telephone = object.getString("telephone");
         role = object.getString("role");
         birthday = object.getString("birthday");
-       // address = object.getString("address");
+        address = object.getString("address");
+        headImage = object.getString("headImage");
     }
 }

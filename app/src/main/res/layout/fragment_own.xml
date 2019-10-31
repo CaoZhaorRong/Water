@@ -15,8 +15,9 @@
         <ImageView
             android:id="@+id/own_view_head"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/scan"/>
+           android:scaleType="center"
+            android:background="@drawable/tv_circle_style"
+            android:layout_height="50dp"/>
         <TextView
             android:id="@+id/own_view_name"
             android:layout_width="match_parent"

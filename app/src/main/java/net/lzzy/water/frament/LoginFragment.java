@@ -10,7 +10,9 @@ import net.lzzy.water.models.User;
 import net.lzzy.water.network.UserService;
 import net.lzzy.water.utils.AbstractStaticHandler;
 import net.lzzy.water.utils.AppUtils;
+import net.lzzy.water.utils.UserCookies;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -21,6 +23,8 @@ public class LoginFragment extends BaseFragment {
     private static final int WHAT_LOGIN = 0;
     private static final int WHAT_L_EXCEPTION = 1;
     private OnGoToLogin listener;
+    private String userPhone;
+    private String userPassword;
 
     public LoginFragment() {
     }
@@ -44,6 +48,7 @@ public class LoginFragment extends BaseFragment {
                         User user = UserService.getUser(json);
                         if (user != null) {
                             AppUtils.setUser(user);
+                            //UserCookies.getInstance().insertUser(fragment.userPhone,fragment.userPassword);
                             fragment.listener.OnGoToLogin();
                             Toast.makeText(fragment.getContext(), "登录成功", Toast.LENGTH_SHORT).show();
                         }else {
@@ -72,9 +77,18 @@ public class LoginFragment extends BaseFragment {
         EditText password = findViewById(R.id.user_login_password);
         Button login = findViewById(R.id.user_login);
         login.setOnClickListener(view1 -> {
+          //  UserCookies.getInstance().clear();
             User json = new User();
-            json.setTelephone(phone.getText().toString());
-            json.setPassword(password.getText().toString());
+           // String[] array = UserCookies.getInstance().getUser();
+        /*    if (array!=null){
+                json.setTelephone(array[0]);
+                json.setPassword(array[1]);
+            }else {*/
+                userPhone = phone.getText().toString();
+                userPassword = password.getText().toString();
+                json.setTelephone(userPhone);
+                json.setPassword(userPassword);
+           // }
             executor.execute(() -> {
                 try {
                     String data = UserService.getUserFromServer(json);
