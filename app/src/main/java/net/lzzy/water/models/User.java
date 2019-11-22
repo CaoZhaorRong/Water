@@ -1,5 +1,8 @@
 package net.lzzy.water.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import net.lzzy.sqllib.Jsonable;
 
 import org.json.JSONException;
@@ -8,7 +11,7 @@ import org.json.JSONObject;
 /**
  * @author 菜鸡
  */
-public class User implements Jsonable {
+public class User implements Jsonable , Parcelable {
     private String uid;
     //编号
     private String username;
@@ -25,7 +28,31 @@ public class User implements Jsonable {
     private String role;
     //角色
 
-//region
+    public  User(){}
+    protected User(Parcel in) {
+        uid = in.readString();
+        username = in.readString();
+        password = in.readString();
+        telephone = in.readString();
+        headImage = in.readString();
+        address = in.readString();
+        birthday = in.readString();
+        role = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    //region
     public String getUid() {
         return uid;
     }
@@ -94,15 +121,15 @@ public class User implements Jsonable {
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
-        json.put("uid",uid);
-        json.put("password",password);
-        json.put("telephone",telephone);
-        json.put("uid",uid);
-        json.put("username",username);
-        json.put("headImage",headImage);
-        json.put("address",address);
-        json.put("birthday",birthday);
-        json.put("role",role);
+        json.put("uid", uid);
+        json.put("password", password);
+        json.put("telephone", telephone);
+        json.put("uid", uid);
+        json.put("username", username);
+        json.put("headImage", headImage);
+        json.put("address", address);
+        json.put("birthday", birthday);
+        json.put("role", role);
         return json;
     }
 
@@ -113,8 +140,27 @@ public class User implements Jsonable {
         password = object.getString("password");
         telephone = object.getString("telephone");
         role = object.getString("role");
-        birthday = object.getString("birthday");
-        address = object.getString("address");
         headImage = object.getString("headImage");
+        if (!object.isNull("birthday") && !object.isNull("address")) {
+            birthday = object.getString("birthday");
+            address = object.getString("address");
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(uid);
+        parcel.writeString(username);
+        parcel.writeString(password);
+        parcel.writeString(telephone);
+        parcel.writeString(headImage);
+        parcel.writeString(address);
+        parcel.writeString(birthday);
+        parcel.writeString(role);
     }
 }

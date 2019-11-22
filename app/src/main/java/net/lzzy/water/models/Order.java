@@ -1,10 +1,18 @@
 package net.lzzy.water.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import net.lzzy.sqllib.Jsonable;
+import net.lzzy.water.network.OrderCartService;
+import net.lzzy.water.network.ProductService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author 菜鸡
+ */
 public class Order implements Jsonable {
 
     private String oid;
@@ -21,10 +29,29 @@ public class Order implements Jsonable {
     //名字
     private String telephone ;
     //电话
-    private String productId;
+    private  Product product;
     private String userId;
     private int count;
-//region
+    public  Order(){}
+
+    //region
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getOid() {
         return oid;
     }
@@ -81,22 +108,6 @@ public class Order implements Jsonable {
         this.telephone = telephone;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public int getCount() {
         return count;
     }
@@ -108,7 +119,15 @@ public class Order implements Jsonable {
 
     @Override
     public JSONObject toJson() throws JSONException {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("state",state);
+        object.put("address",address);
+        object.put("name",name);
+        object.put("telephone",telephone);
+        object.put("count",count);
+        object.put("userId",userId);
+        object.put("product",product.toJson());
+        return object;
     }
 
     @Override
@@ -120,8 +139,12 @@ public class Order implements Jsonable {
         address= object.getString("address");
         name = object.getString("name");
         telephone = object.getString("telephone");
-        productId= object.getString("productId");
-        userId= object.getString("userId");
         count= object.getInt("count");
+        try {
+            setProduct(OrderCartService.getProduct(object.toString()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }

@@ -19,8 +19,6 @@ public class CategoryService {
     }
     public static List<Category> getCategories(String json) throws IllegalAccessException, JSONException, InstantiationException {
         //数组==调用getArray方法 getSingle得到一个单独的Java数据
-//        JSONObject jsonObject = new JSONObject(json);
-//        String array = jsonObject.getString(ApiConstants.KEY_CATEGORY);
         JsonConverter<Category> converter = new JsonConverter<>(Category.class);
         return converter.getArray(json,ApiConstants.KEY_CATEGORY);
     }

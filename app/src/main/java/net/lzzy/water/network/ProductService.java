@@ -3,8 +3,11 @@ package net.lzzy.water.network;
 import net.lzzy.sqllib.JsonConverter;
 import net.lzzy.water.constants.ApiConstants;
 import net.lzzy.water.models.Category;
+import net.lzzy.water.models.Colors;
+import net.lzzy.water.models.Evaluate;
 import net.lzzy.water.models.Image;
 import net.lzzy.water.models.Product;
+import net.lzzy.water.models.Yardage;
 
 import org.json.JSONException;
 
@@ -29,4 +32,17 @@ public class ProductService {
         return  converter.getArray(json);
     }
 
+    public  static List<Colors> getColors(String json) throws IllegalAccessException, JSONException, InstantiationException {
+        JsonConverter<Colors> converter=new JsonConverter<>(Colors.class);
+        return  converter.getArray(json);
+    }
+
+    public  static List<Evaluate> getEvaluate(String json) throws IllegalAccessException, JSONException, InstantiationException {
+        JsonConverter<Evaluate> converter=new JsonConverter<>(Evaluate.class);
+        return  converter.getArray(json);
+    }
+    public  static List<Yardage> getYardage(String json) throws IllegalAccessException, JSONException, InstantiationException {
+        JsonConverter<Yardage> converter=new JsonConverter<>(Yardage.class);
+        return  converter.getArray(json);
+    }
 }

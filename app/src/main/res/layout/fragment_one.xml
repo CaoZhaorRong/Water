@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#ffffff"
+        android:layout_height="50dp"
         android:orientation="vertical">
-        <include layout="@layout/head" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ffffff"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <SearchView
                 android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:background="#cccccc"
+                android:layout_height="40dp"
+                android:background="@drawable/search_style"
+                android:queryHint="搜索"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1" />
 
             <ImageView
+                android:id="@+id/fragment_one_menu"
                 android:layout_width="24dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/category" />
+                android:background="@drawable/menu" />
         </LinearLayout>
 
     </LinearLayout>
+<!--    <TextView android:id="@+id/fragment_one_time"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center_horizontal"
+        tools:text="2019.4.23 12:22:11"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ScrollView
             android:layout_width="match_parent"
             android:fillViewport="true"
+            android:scrollbars="none"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -57,11 +64,15 @@
 
                     <net.lzzy.water.utils.HorizontalListView
                         android:id="@+id/fragment_one_horizontal_lv"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"/>
                 </LinearLayout>
-
+                <TextView android:id="@+id/fragment_one_hint"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="25dp"
+                    android:gravity="center_horizontal"
+                    android:text="正在加载……"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,21 +80,18 @@
 
                     <com.youth.banner.Banner
                         android:id="@+id/banner"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
 
                     <net.lzzy.water.utils.MyGridView
                         android:id="@+id/one_fragment_gv"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#cccccc"
-                        android:columnWidth="120dp"
-                        android:drawSelectorOnTop="true"
-                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
                         android:scrollbars="none"
-                        android:stretchMode="columnWidth"
-                        android:transcriptMode="alwaysScroll"
-                        android:verticalSpacing="10dp" />
+                        android:horizontalSpacing="3dp"
+                        android:verticalSpacing="3dp" />
                 </LinearLayout>
 
             </LinearLayout>

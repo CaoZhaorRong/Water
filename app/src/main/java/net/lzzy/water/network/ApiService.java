@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -27,18 +28,10 @@ import okhttp3.Response;
  */
 public class ApiService {
     private static final OkHttpClient CLIENT = new OkHttpClient();
-
-    public static String post1(String url, JSONObject json) throws IOException {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                json.toString());
-        Request request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build();
-        Response response = CLIENT.newCall(request).execute();
-        return response.body().string();
-    }
-
+//    private static final OkHttpClient CLIENT = new OkHttpClient.Builder()
+//            .connectTimeout(5000, TimeUnit.MILLISECONDS)
+//            .readTimeout(5000, TimeUnit.MILLISECONDS)
+//            .build();
 
     public static String get(String address) throws IOException {
         URL url = new URL(address);

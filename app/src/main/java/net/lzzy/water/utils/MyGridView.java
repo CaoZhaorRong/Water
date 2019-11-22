@@ -2,6 +2,7 @@ package net.lzzy.water.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.AbsListView;
 import android.widget.GridView;
 
 /**

@@ -1,6 +1,7 @@
 package net.lzzy.water.activites;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -9,12 +10,14 @@ import android.view.Window;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import net.lzzy.water.R;
+import net.lzzy.water.constants.ApiConstants;
 import net.lzzy.water.models.Category;
 import net.lzzy.water.network.CategoryService;
 import net.lzzy.water.utils.AbstractStaticHandler;
 import net.lzzy.water.utils.AppUtils;
-import net.lzzy.water.utils.StatusBarUtil;
+import net.lzzy.water.utils.ViewUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,9 +33,10 @@ public class SplashActivity extends AppCompatActivity {
     private static final int WHAT_EXCEPTION = 2;
     private static final int WHAT_COUNT_DONE = 3;
     private static final int WHAT_CATEGORY = 4;
+    public static final int WHAT_SERVER_OFF = 6;
     private static final int WHAT_C_EXCEPTION = 5;
     public static final String RESULT_CATEGORIES = "categories";
-    private int seconds = 2;
+    private int seconds = 5;
     private TextView tvCount;
     private boolean isServerOn = true;
     private List<Category> categories =new ArrayList<>();
@@ -41,11 +45,11 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setStatusBar();
         setContentView(R.layout.activity_splash);
+        AppUtils.addActivity(this);
         intiView();
+        //executor.execute(this::detectServerStatus);
         executor.execute(this::couDown);
-        executor.execute(this::getCategory);
     }
     private ThreadPoolExecutor executor = AppUtils.getExecutor();
 
@@ -75,20 +79,17 @@ public class SplashActivity extends AppCompatActivity {
                         activity.gotoMain();
                     }
                     break;
-                case WHAT_CATEGORY:
-                    String json = String.valueOf(msg.obj);
-                    try {
-                        activity.categories = CategoryService.getCategories(json);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case WHAT_C_EXCEPTION:
-
+                case WHAT_SERVER_OFF:
+                    //region 处理消息
+                    Activity context = AppUtils.getRunningActivity();
+                    new AlertDialog.Builder(context)
+                            .setMessage("服务器没有响应，是否继续\n" + msg.obj)
+                            .setNegativeButton("退出", (dialog, which) -> AppUtils.exit())
+                            .setNeutralButton("设置", (dialog, which) -> ViewUtils.goSetting(context))
+                            .show();
                     break;
                     default:
                         break;
-
             }
         }
     }
@@ -116,18 +117,42 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    public  void  getCategory(){
-       try {
-                String json = CategoryService.getCategoryFromServer();
-                handler.sendMessage(handler.obtainMessage(WHAT_CATEGORY, json));
-       } catch (IOException e) {
-                handler.sendMessage(handler.obtainMessage(WHAT_C_EXCEPTION, e.getMessage()));
-       }
+    //region 探测服务器状态
+
+    private void detectServerStatus() {
+        try {
+            AppUtils.tryConnectServer(ApiConstants.URL_NET_API);
+        } catch (IOException e) {
+            isServerOn = false;
+            handler.sendMessage(handler.obtainMessage(WHAT_SERVER_OFF, e.getMessage()));
+        }
+    }
+    //endregion
+    //region 集中处理activity
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppUtils.removeActivity(this);
     }
 
-    protected void setStatusBar() {
-        //这里做了两件事情，1.使状态栏透明并使contentView填充到状态栏 2.预留出状态栏的位置，防止界面上的控件离顶部靠的太近。这样就可以实现开头说的第二种情况的沉浸式状态栏了
-        StatusBarUtil.setTransparent(this);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppUtils.setRunning(getLocalClassName());
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        AppUtils.setStopped(getLocalClassName());
+    }
+    //endregion
+    @Override
+    public void onBackPressed() {
+        new android.app.AlertDialog.Builder(this)
+                .setMessage("退出应用吗？")
+                .setPositiveButton("退出",(dialog, which) -> AppUtils.exit())
+                .show();
+    }
 }

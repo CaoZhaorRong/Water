@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2019/3/11
  * Description:
  */
-public class AppUtils extends Application implements OwnFragment.OnGoToLogin {
+public class AppUtils extends Application {
     public static final String URL_ID = "url";
     public static final String URL_PORT = "urlPort";
     public static final String SP_SETTING = "spSetting";
@@ -49,26 +49,24 @@ public class AppUtils extends Application implements OwnFragment.OnGoToLogin {
 
 
     private static User user;
-
+    public static void clearUser(){
+        user = null;
+    }
     public static User getUser(){
        return user;
     }
-    public static User setUser(User date){
+    public static void setUser(User date){
         user = new User();
         user = date;
-        return user;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        wContext = new WeakReference<Context>(this);
+        wContext = new WeakReference<>(this);
     }
-
     public static Context getContext() {
         return wContext.get();
-
-        // return wContext;
     }
     //region Activity的集中管理
 
@@ -164,8 +162,8 @@ public class AppUtils extends Application implements OwnFragment.OnGoToLogin {
 
     public static Pair<String, String> loadServerSetting(Context context) {
         SharedPreferences spSetting = context.getSharedPreferences(SP_SETTING, MODE_PRIVATE);
-        String ip = spSetting.getString(URL_ID, "10.88.91.103");
-        String port = spSetting.getString(URL_PORT, "8888");
+        String ip = spSetting.getString(URL_ID, "192.168.1.100");
+        String port = spSetting.getString(URL_PORT, "8080");
         return new Pair<>(ip, port);
     }
     //endregion
@@ -244,8 +242,4 @@ public class AppUtils extends Application implements OwnFragment.OnGoToLogin {
         return result;
     }
 
-    @Override
-    public void OnGoToLogin(User date) {
-        user = date;
-    }
 }

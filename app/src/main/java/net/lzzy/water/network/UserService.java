@@ -21,4 +21,9 @@ public class UserService {
         JsonConverter<User> converter = new JsonConverter<>(User.class);
         return converter.getSingle(json,ApiConstants.KEY_USER);
     }
+
+    public static User getUser(String json,String kw) throws IllegalAccessException, JSONException, InstantiationException {
+        JsonConverter<User> converter = new JsonConverter<>(User.class);
+        return converter.getSingle(json,kw);
+    }
 }

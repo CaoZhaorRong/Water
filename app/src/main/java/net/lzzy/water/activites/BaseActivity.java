@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.lzzy.water.utils.AppUtils;
-import net.lzzy.water.utils.StatusBarUtil;
 
 /**
  * @author lzzy_gxy
@@ -27,7 +26,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setStatusBar();
         setContentView(getLayout());
         AppUtils.addActivity(this);
         manager = getSupportFragmentManager();
@@ -38,10 +36,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             //事务 manager.beginTransaction()
         }
 
-    }
-    protected void setStatusBar() {
-        //这里做了两件事情，1.使状态栏透明并使contentView填充到状态栏 2.预留出状态栏的位置，防止界面上的控件离顶部靠的太近。这样就可以实现开头说的第二种情况的沉浸式状态栏了
-        StatusBarUtil.setTransparent(this);
     }
 
     protected FragmentManager getManager(){

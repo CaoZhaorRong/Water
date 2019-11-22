@@ -2,12 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <!--右侧搜索操作条目-->
-    <item android:id="@+id/action_search"
-        android:title="搜索"
-        app:showAsAction="always"
-        app:actionViewClass="android.support.v7.widget.SearchView" />
+
     <!--右侧设置条目，收起-->
-    <item android:id="@+id/action_setting"
+  <!--  <item android:id="@+id/action_setting"
         android:title="设置"
+        app:showAsAction="never"/>-->
+    <!--<item android:id="@+id/action_register"
+        android:title="注册"
+        app:showAsAction="never"/>-->
+    <item android:id="@+id/action_exit"
+        android:title="退出"
         app:showAsAction="never"/>
 </menu>

@@ -21,17 +21,20 @@ public class Product implements Jsonable , Parcelable {
     private String pname;
     //商品名
     private Double price;
-    //商城价
-    private String pimage;
     //图片路径
     private String pdate ;
     //上架时间
     private int is_hot;
+
     //是否热门，1表示热门，0表示不热门
+
     private String pdesc;
     //商品描述
     private  String cid;
     private List<Image> pImage;
+    private  List<Colors> colors;
+    private List<Evaluate> evaluates;
+    private List<Yardage> yardages;
 
     public  Product(){}
     protected Product(Parcel in) {
@@ -42,12 +45,14 @@ public class Product implements Jsonable , Parcelable {
         } else {
             price = in.readDouble();
         }
-        pimage = in.readString();
         pdate = in.readString();
         is_hot = in.readInt();
         pdesc = in.readString();
         cid = in.readString();
         pImage = in.readArrayList(Image.class.getClassLoader());
+        colors = in.readArrayList(Colors.class.getClassLoader());
+        evaluates = in.readArrayList(Evaluate.class.getClassLoader());
+        yardages = in.readArrayList(Yardage.class.getClassLoader());
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -63,6 +68,31 @@ public class Product implements Jsonable , Parcelable {
     };
 
     //region
+
+    public List<Colors> getColors() {
+        return colors;
+    }
+
+    public void setColors(List<Colors> colors) {
+        this.colors = colors;
+    }
+
+    public List<Evaluate> getEvaluates() {
+        return evaluates;
+    }
+
+    public void setEvaluates(List<Evaluate> evaluates) {
+        this.evaluates = evaluates;
+    }
+
+    public List<Yardage> getYardages() {
+        return yardages;
+    }
+
+    public void setYardages(List<Yardage> yardages) {
+        this.yardages = yardages;
+    }
+
     public String getCid() {
         return cid;
     }
@@ -93,14 +123,6 @@ public class Product implements Jsonable , Parcelable {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public String getPimage() {
-        return pimage;
-    }
-
-    public void setPimage(String pimage) {
-        this.pimage = pimage;
     }
 
     public String getPdate() {
@@ -137,24 +159,39 @@ public class Product implements Jsonable , Parcelable {
 
     @Override
     public JSONObject toJson() throws JSONException {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("pid",pid);
+        object.put("price",price);
+        return object;
     }
 //endregion
 
     @Override
-    public void fromJson(JSONObject jsonObject) throws JSONException {
-        pid = jsonObject.getString("pid");
-        pname = jsonObject.getString("pname");
-        price = jsonObject.getDouble("price");
-        //pimage = jsonObject.getString("pimage");
-        pdate = jsonObject.getString("pdate");
-        is_hot = jsonObject.getInt("is_hot");
-        pdesc = jsonObject.getString("pdesc");
-        cid = jsonObject.getString("cid");
-        String image =jsonObject.getString("pImage");
+    public void fromJson(JSONObject object) throws JSONException {
+        pid = object.getString("pid");
+        pname = object.getString("pname");
+        price = object.getDouble("price");
+        pdate = object.getString("pdate");
+        is_hot = object.getInt("is_hot");
+        pdesc = object.getString("pdesc");
+        cid = object.getString("cid");
         try {
-            List<Image> data = ProductService.getImage(image);
-            setpImage(data);
+            if (!object.isNull("pImage") ){
+                String image =object.getString("pImage");
+                setpImage(ProductService.getImage(image));
+            }
+            if (!object.isNull("colors")){
+                String json = object.getString("colors");
+                setColors(ProductService.getColors(json));
+            }
+            if (!object.isNull("evaluates")){
+                String json = object.getString("evaluates");
+                setEvaluates(ProductService.getEvaluate(json));
+            }
+            if (!object.isNull("yardages")){
+                String json = object.getString("yardages");
+                setYardages(ProductService.getYardage(json));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -176,11 +213,13 @@ public class Product implements Jsonable , Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeDouble(price);
         }
-        parcel.writeString(pimage);
         parcel.writeString(pdate);
         parcel.writeInt(is_hot);
         parcel.writeString(pdesc);
         parcel.writeString(cid);
         parcel.writeList(pImage);
+        parcel.writeList(colors);
+        parcel.writeList(evaluates);
+        parcel.writeList(yardages);
     }
 }
