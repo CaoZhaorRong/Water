@@ -23,6 +23,10 @@ public class OrderService {
         String address = ApiConstants.URL_COUNT.concat(uid).concat(ApiConstants.COUNT.concat(state+""));
         return ApiService.okGet(address);
     }
+    public static String getState(String uid,int state) throws  IOException{
+        String address = ApiConstants.URL_STATE.concat(uid).concat(ApiConstants.STATE.concat(state+""));
+        return ApiService.okGet(address);
+    }
 
     public static int posOrderFromServer(Order order) throws IOException, JSONException {
         String address= ApiConstants.POS_ORDER ;

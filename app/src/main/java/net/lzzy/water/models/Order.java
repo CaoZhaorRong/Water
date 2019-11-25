@@ -1,11 +1,7 @@
 package net.lzzy.water.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import net.lzzy.sqllib.Jsonable;
 import net.lzzy.water.network.OrderCartService;
-import net.lzzy.water.network.ProductService;
 
 import org.json.JSONException;
 import org.json.JSONObject;

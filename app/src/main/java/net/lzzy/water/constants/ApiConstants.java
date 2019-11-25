@@ -42,4 +42,7 @@ public class ApiConstants {
     public static final  String URL_COUNT = URL_API.concat("api/count/u=");
     public static  final String COUNT = "&state=";
 
+    public static final  String URL_STATE = URL_API.concat("api/order/u=");
+    public static  final String STATE = "&state=";
+
 }

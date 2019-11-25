@@ -3,7 +3,6 @@ package net.lzzy.water.frament;
 import android.os.Message;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -27,10 +26,6 @@ public class AllOrderFragment extends BaseFragment {
 
     private static final int WHAT_ORDER = 0;
     private ListView lv;
-    private ImageView img;
-    private TextView tvName;
-    private TextView tvPAC;
-    private TextView tvParameter;
     private User user;
     private GenericAdapter<Order> adapter;
 
@@ -71,13 +66,13 @@ public class AllOrderFragment extends BaseFragment {
     }
 
     private void show(List<Order> orders) {
-        adapter = new GenericAdapter<Order>(getActivity(), R.layout.order_item, orders) {
+        adapter = new GenericAdapter<Order>(getActivity(), R.layout.all_item, orders) {
             @Override
             public void populate(ViewHolder holder, Order order) {
-                holder.setTextView(R.id.all_name,order.getName())
-                        .setTextView(R.id.all_price_and_count,String.valueOf(order.getProduct().getPrice()).concat("×")
+                holder.setTextView(R.id.fragment_name,order.getName())
+                        .setTextView(R.id.fragment_price,String.valueOf(order.getProduct().getPrice()).concat("×")
                                 .concat(String.valueOf(order.getCount())));
-                ImageView imageView = holder.getView(R.id.all_imgCover);
+                ImageView imageView = holder.getView(R.id.fragment_imgCover);
                 Picasso.get().load(ApiConstants.URL_API + order.getProduct().getpImage().get(0).getImage()).into(imageView);
             }
 
@@ -117,10 +112,6 @@ public class AllOrderFragment extends BaseFragment {
 
     private void intiView() {
         lv = findViewById(R.id.all_iv);
-        img = findViewById(R.id.all_imgCover);
-        tvName = findViewById(R.id.all_name);
-        tvPAC = findViewById(R.id.all_price_and_count);
-        tvParameter = findViewById(R.id.all_parameter);
     }
 
     @Override
