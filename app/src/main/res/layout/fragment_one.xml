@@ -1,29 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/fragment_one_swipe"
+    android:layout_height="match_parent">
+
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/colorWhite"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:background="#ffffff"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
-            <SearchView
+            <LinearLayout
+                android:id="@+id/to_search_activity"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginStart="25dp"
+                android:orientation="horizontal"
+                android:background="@drawable/layout_search"
+                android:layout_height="35dp">
+                <EditText
+                    android:id="@+id/edit_search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:drawableLeft="@drawable/ss"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:hint="请输入关键词"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:imeOptions="actionSearch"
+                    android:background="@null"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/s_s"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="2dp"
+                    android:gravity="center"
+                    android:text="搜索"/>
+            </LinearLayout>
+        <!--    <SearchView
+                android:id="@+id/search_product"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:background="@drawable/search_style"
                 android:queryHint="搜索"
                 android:layout_marginStart="15dp"
-                android:layout_weight="1" />
-
+                android:layout_weight="1" />-->
             <ImageView
                 android:id="@+id/fragment_one_menu"
                 android:layout_width="24dp"
@@ -32,23 +66,28 @@
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/menu" />
         </LinearLayout>
-
+        <net.lzzy.water.utils.HorizontalListView
+            android:id="@+id/fragment_one_horizontal_lv"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="35dp"/>
     </LinearLayout>
-<!--    <TextView android:id="@+id/fragment_one_time"
+    <TextView android:id="@+id/fragment_one_hint"
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="25dp"
         android:gravity="center_horizontal"
-        tools:text="2019.4.23 12:22:11"/>-->
-
+        android:text="正在加载…"/>
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content">
-
+<!--
         <ScrollView
             android:layout_width="match_parent"
             android:fillViewport="true"
             android:scrollbars="none"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent">-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,23 +95,12 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <net.lzzy.water.utils.HorizontalListView
-                        android:id="@+id/fragment_one_horizontal_lv"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"/>
-                </LinearLayout>
-                <TextView android:id="@+id/fragment_one_hint"
+            <!--    <TextView android:id="@+id/fragment_one_hint"
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp"
                     android:layout_height="25dp"
                     android:gravity="center_horizontal"
-                    android:text="正在加载……"/>
+                    android:text="正在加载…"/>-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,22 +112,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
 
-                    <net.lzzy.water.utils.MyGridView
+                    <GridView
                         android:id="@+id/one_fragment_gv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorWhite"
                         android:scrollbars="none"
-                        android:horizontalSpacing="3dp"
-                        android:verticalSpacing="3dp" />
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center"
+                        android:horizontalSpacing="8dp"
+                        android:layout_marginBottom="1dp"
+                        android:verticalSpacing="8dp" />
                 </LinearLayout>
 
             </LinearLayout>
-        </ScrollView>
+     <!--   </ScrollView>-->
 
     </RelativeLayout>
 
 </LinearLayout>
 
-
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

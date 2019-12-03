@@ -2,11 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/colorWhite"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:background="@drawable/search_styles"
         android:orientation="horizontal">
 
         <ImageView
@@ -15,7 +18,7 @@
             android:src="@drawable/arrows"
             android:layout_height="25dp"/>
         <View
-            android:layout_width="25dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent"/>
         <TextView
             android:layout_width="match_parent"
@@ -23,97 +26,83 @@
             android:gravity="center_vertical"
             android:layout_height="match_parent"/>
     </LinearLayout>
-    <LinearLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@drawable/search_styles"
+        android:layout_marginBottom="8dp"
+        android:layout_height="70dp">
         <LinearLayout
+            android:id="@+id/add_new_address"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:visibility="gone"
             android:orientation="horizontal">
-            <TextView
-                android:layout_marginStart="20dp"
-                android:layout_width="wrap_content"
-                android:textSize="15sp"
-                android:text="收货人："
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textSize="15sp"
-                android:text="曹兆荣"
-                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:src="@drawable/address"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:textSize="15sp"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_marginEnd="8dp"
-                android:text="18776504453"/>
-            <TextView
+                android:layout_marginStart="5dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:text="添加收货地址"/>
+            <ImageView
                 android:layout_width="15dp"
-                android:text=""
-                android:textSize="15sp"
-                android:gravity="center"
+                android:src="@drawable/right"
                 android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:text="广西柳州市鱼峰区柳州职业技术学院"
-            android:textSize="15sp"
-            android:layout_marginStart="20dp"
-            android:gravity="center_vertical"
-            android:layout_height="25dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/colorWhite"/>
-    </LinearLayout>
+
+        <include
+            android:id="@+id/submit_location"
+            layout="@layout/location_item"/>
+    </FrameLayout>
 
     <include
         android:id="@+id/layout_close"
         layout="@layout/close"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="@color/colorWhite"/>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ListView
-        android:id="@+id/close_submit"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginBottom="50dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:background="@color/colorWhite"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/submit_submit_price"
-            android:layout_width="0dp"
+        <ListView
+            android:id="@+id/close_submit"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/colorAccent"
-            android:gravity="center_vertical"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/submit_submit_order"
-            android:layout_width="140dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:background="#33CCCC"
-            android:text="提交订单"/>
-    </LinearLayout>
+            android:layout_marginBottom="50dp" />
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/search_styles"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/submit_submit_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center_vertical"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/submit_submit_order"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@color/colorBabyBlue"
+                android:text="提交订单"/>
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

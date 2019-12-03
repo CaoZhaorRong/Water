@@ -18,9 +18,27 @@ import java.util.List;
  * @author 菜鸡
  */
 public class ProductService {
+
+    public static int postEvaluate(Evaluate evaluate) throws IOException, JSONException {
+        String address= ApiConstants.URL_EVALUATE;
+        return ApiService.okPost(address,evaluate.toJson());
+    }
+
+    public static String getSearch(String key) throws IOException {
+        if (key != null){
+            String address= ApiConstants.SEARCH_KEY.concat(key);
+            return ApiService.okGet(address);
+        }
+        return "";
+    }
+
+
     public static String getProductFromServer(String cid) throws IOException {
-        String address= ApiConstants.SPLASH_PRODUCT.concat(cid);
-        return ApiService.okGet(address);
+        if (cid != null){
+            String address= ApiConstants.SPLASH_PRODUCT.concat(cid);
+            return ApiService.okGet(address);
+        }
+        return "";
     }
     public static List<Product> getProducts(String json) throws IllegalAccessException, JSONException, InstantiationException {
         //数组==调用getArray方法 getSingle得到一个单独的Java数据

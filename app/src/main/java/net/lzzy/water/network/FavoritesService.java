@@ -14,9 +14,11 @@ import java.util.List;
  * @author 菜鸡
  */
 public class FavoritesService {
-    public static String postFavorties(String pid,String uid) throws IOException {
+    public static boolean postFavorties(String pid,String uid) throws IOException, JSONException {
         String address = ApiConstants.URL_FAVORITES.concat(pid).concat("&u=").concat(uid);
-        return ApiService.okGet(address);
+        String json =  ApiService.okGet(address);
+        JSONObject object = new JSONObject(json);
+        return object.getBoolean("flag");
     }
 
     public static boolean isExists(String pid,String uid) throws IOException, JSONException {

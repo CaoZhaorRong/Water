@@ -1,5 +1,8 @@
 package net.lzzy.water.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import net.lzzy.sqllib.Jsonable;
 import net.lzzy.water.network.OrderCartService;
 import net.lzzy.water.network.ProductService;
@@ -12,7 +15,7 @@ import org.json.JSONObject;
 /**
  * @author 菜鸡
  */
-public class OrderCart implements Jsonable {
+public class OrderCart implements Jsonable , Parcelable {
     private String id;
     ///购物车id
 
@@ -23,6 +26,32 @@ public class OrderCart implements Jsonable {
     private User user;
     private Product product;
     ///商品
+
+    public OrderCart(){}
+
+    protected OrderCart(Parcel in) {
+        id = in.readString();
+        count = in.readInt();
+        if (in.readByte() == 0) {
+            total = null;
+        } else {
+            total = in.readDouble();
+        }
+        user = in.readParcelable(User.class.getClassLoader());
+        product = in.readParcelable(Product.class.getClassLoader());
+    }
+
+    public static final Creator<OrderCart> CREATOR = new Creator<OrderCart>() {
+        @Override
+        public OrderCart createFromParcel(Parcel in) {
+            return new OrderCart(in);
+        }
+
+        @Override
+        public OrderCart[] newArray(int size) {
+            return new OrderCart[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -82,9 +111,27 @@ public class OrderCart implements Jsonable {
             Product pro = OrderCartService.getProduct(jsonObject.toString());
             setProduct(pro);
             setUser(OrderCartService.getUser());
-            //setProduct(product);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeInt(count);
+        if (total == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(total);
+        }
+        parcel.writeParcelable(user, i);
+        parcel.writeParcelable(product, i);
     }
 }

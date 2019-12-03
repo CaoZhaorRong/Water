@@ -10,6 +10,6 @@
         android:scrollbars="none"
         android:dividerHeight="8dp"
         android:background="@color/colorWhite"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

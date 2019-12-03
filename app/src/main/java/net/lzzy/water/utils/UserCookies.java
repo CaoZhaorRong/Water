@@ -19,8 +19,10 @@ public class UserCookies {
     private static final String SP_SETTING = "spSetting";
     private static final String URL_PHONE = "url_phone";
     private static final String URL_PASSWORD = "url_password";
+    public static final String SP_LOCATION = "spLocation";
     private SharedPreferences spUser;
     private SharedPreferences spTime;
+    private SharedPreferences spLocation;
 
     private static final UserCookies INSTANCE = new UserCookies();
     private  SharedPreferences spSetting;
@@ -31,6 +33,17 @@ public class UserCookies {
     private UserCookies(){
         spUser = AppUtils.getContext().getSharedPreferences(SP_INFO,Context.MODE_PRIVATE);
         spSetting = AppUtils.getContext().getSharedPreferences(SP_SETTING, Context.MODE_PRIVATE);
+        spLocation = AppUtils.getContext().getSharedPreferences(SP_LOCATION,Context.MODE_PRIVATE);
+    }
+
+    public void saveLocations(String json) {
+       spLocation.edit()
+                .putString(SP_LOCATION, json)
+                .apply();
+    }
+
+    public  String loadLocations() {
+        return spLocation.getString(SP_LOCATION, "");
     }
 
     public void saveServerSetting(String ip, String port) {

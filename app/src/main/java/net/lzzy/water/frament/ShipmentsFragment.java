@@ -53,7 +53,9 @@ public class ShipmentsFragment extends BaseFragment {
                     String data = String.valueOf(msg.obj);
                     try {
                         List<Order> orders = OrderService.getOrders(data);
-                        fragment.show(orders);
+                        if (orders!=null&&orders.size()>0){
+                            fragment.show(orders);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -78,7 +80,7 @@ public class ShipmentsFragment extends BaseFragment {
                 TextView tvObligation = holder.getView(R.id.fragment_btn);
                 tvObligation.setText("提醒发货");
                 tvObligation.setOnClickListener(view ->
-                        Toast.makeText(getContext(),"gg",Toast.LENGTH_SHORT).show());
+                        Toast.makeText(getContext(),"已提醒对方发货",Toast.LENGTH_SHORT).show());
             }
 
             @Override

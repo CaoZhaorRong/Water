@@ -58,16 +58,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/own_view_tvCount1"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:gravity="center"
-                android:visibility="gone"
-                android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/bg_order_under"
-                android:textSize="12sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -79,6 +70,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/obligation"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -86,22 +78,24 @@
                     android:gravity="center"
                     android:text="待付款"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/own_view_tvCount1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_order_under"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"/>
         </FrameLayout>
         <FrameLayout
             android:id="@+id/own_view_tab2"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/own_view_tvCount2"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:gravity="center"
-                android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                android:background="@drawable/bg_order_under"
-                android:textSize="12sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -112,6 +106,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/goods"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -119,22 +114,24 @@
                     android:gravity="center"
                     android:text="待发货"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/own_view_tvCount2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:gravity="center"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                android:textColor="@color/colorBlack"
+                android:background="@drawable/bg_order_under"
+                android:textSize="10sp"/>
         </FrameLayout>
         <FrameLayout
             android:id="@+id/own_view_tab3"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/own_view_tvCount3"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:gravity="center"
-                android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                android:background="@drawable/bg_order_under"
-                android:textSize="12sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -145,6 +142,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/shipped"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -152,22 +150,24 @@
                     android:gravity="center"
                     android:text="待收货"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/own_view_tvCount3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                android:background="@drawable/bg_order_under"
+                android:textSize="10sp"/>
         </FrameLayout>
         <FrameLayout
             android:id="@+id/own_view_tab4"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/own_view_tvCount4"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:gravity="center"
-                android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                android:background="@drawable/bg_order_under"
-                android:textSize="12sp"/>
+
             <LinearLayout
                 android:id="@+id/own_view_evaluate"
                 android:layout_width="match_parent"
@@ -179,6 +179,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/evaluate"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -186,23 +187,24 @@
                     android:gravity="center"
                     android:text="评价"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/own_view_tvCount4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                android:background="@drawable/bg_order_under"
+                android:textSize="10sp"/>
         </FrameLayout>
         <FrameLayout
             android:id="@+id/own_view_tab5"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/own_view_tvCount5"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:gravity="center"
-                android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                android:background="@drawable/bg_order_under"
-                android:textSize="12sp"
-                android:textColor="@color/colorBlack"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -210,16 +212,30 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"/>
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:src="@drawable/after_sale"/>
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/after_sale" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:gravity="center"
                     android:text="退款/售后"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/own_view_tvCount5"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:gravity="center"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                android:background="@drawable/bg_order_under"
+                android:textSize="10sp"
+                android:textColor="@color/colorBlack"/>
         </FrameLayout>
     </LinearLayout>
     <ImageView

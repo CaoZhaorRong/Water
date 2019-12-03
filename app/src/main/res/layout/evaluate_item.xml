@@ -29,6 +29,6 @@
         android:gravity="center"
         android:layout_gravity="end"
         android:layout_margin="10dp"
-        android:background="@drawable/btn_styles"
+        android:background="@drawable/del_btn_styles"
         android:text="立即评价"/>
 </LinearLayout>

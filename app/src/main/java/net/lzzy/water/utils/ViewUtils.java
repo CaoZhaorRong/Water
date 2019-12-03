@@ -2,6 +2,7 @@ package net.lzzy.water.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -12,10 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import net.lzzy.water.R;
 import net.lzzy.water.activites.MainActivity;
 import net.lzzy.water.activites.SplashActivity;
+import net.lzzy.water.frament.OneFragment;
 
 
 /**
@@ -24,8 +27,10 @@ import net.lzzy.water.activites.SplashActivity;
  * Description:
  */
 public class ViewUtils {
-    private static boolean e = true;
-    public static void goSetting(Context context) {
+
+    public static final String MM = "mm";
+
+    public static void goSetting(Context context, boolean e) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_setting, null);
         Pair<String, String> url = UserCookies.getInstance().loadServerSetting();
         EditText edtIp = view.findViewById(R.id.dialog_setting_edt_ip);
@@ -44,23 +49,17 @@ public class ViewUtils {
                         return;
                     }
                     UserCookies.getInstance().saveServerSetting(ip, port);
-                    if (e){
+                    Intent intent = new Intent(MM);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                         gotoMain(context);
-                    }else {
-                        resume(context);
-                    }
                 })
+                .setCancelable(false)
                 .show();
     }
 
     private static void gotoMain(Context context) {
         if (context instanceof SplashActivity) {
             ((SplashActivity) context).gotoMain();
-        }
-    }
-    private static void resume(Context context){
-        if (context instanceof MainActivity) {
-            ((MainActivity) context).getCategory();
         }
     }
 

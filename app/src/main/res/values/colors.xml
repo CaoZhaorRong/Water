@@ -7,5 +7,6 @@
     <color name="white">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorClose">#33CCCC</color>
+    <color name="colorBabyBlue">#33CCCC</color>
 
 </resources>

@@ -21,41 +21,98 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
-        <TextView
+        <FrameLayout
             android:id="@+id/o_tab0"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:text="全部"/>
-        <TextView
+            android:layout_height="match_parent">
+            <TextView
+               android:id="@+id/tv_one"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="全部"/>
+            <View
+                android:id="@+id/v_one"
+                android:layout_width="30dp"
+                android:layout_gravity="bottom|center"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"/>
+        </FrameLayout>
+        <FrameLayout
             android:id="@+id/o_tab1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:text="待付款"/>
-        <TextView
+            android:layout_height="match_parent">
+            <TextView
+
+                android:id="@+id/tv_tow"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="待付款"/>
+            <View
+                android:id="@+id/v_tow"
+                android:layout_width="30dp"
+                android:layout_gravity="bottom|center"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"/>
+        </FrameLayout>
+        <FrameLayout
             android:id="@+id/o_tab2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:text="待发货"/>
-        <TextView
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_three"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="待发货"/>
+            <View
+                android:id="@+id/v_three"
+                android:layout_width="30dp"
+                android:layout_gravity="bottom|center"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"/>
+        </FrameLayout>
+        <FrameLayout
             android:id="@+id/o_tab3"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:text="待收货"/>
-        <TextView
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_four"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="待收货"/>
+            <View
+                android:id="@+id/v_four"
+                android:layout_width="30dp"
+                android:layout_gravity="bottom|center"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"/>
+        </FrameLayout>
+        <FrameLayout
             android:id="@+id/o_tab4"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:text="待评价"/>
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_five"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="待评价"/>
+            <View
+                android:id="@+id/v_five"
+                android:layout_width="30dp"
+                android:layout_gravity="bottom|center"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"/>
+        </FrameLayout>
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

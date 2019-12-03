@@ -23,18 +23,16 @@
             <TextView
                 android:id="@+id/shop_price"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:textColor="@color/colorAccent"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:text="￥299"/>
             <TextView
-                android:id="@+id/shop_name"
-                android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_height="30dp"
-                android:gravity="center_vertical"
-                android:textColor="#000000"
-                android:text="选择 颜色，尺码"/>
+            android:id="@+id/shop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="#000000"/>
         </LinearLayout>
 
         <TextView
@@ -88,20 +86,13 @@
         android:textColor="@color/colorBlack"
         android:layout_height="wrap_content"/>
     <FrameLayout
-
         android:layout_width="match_parent"
         android:layout_marginStart="15dp"
         android:layout_height="wrap_content">
         <View
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
-        <LinearLayout
-            android:id="@+id/shop_view_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-        </LinearLayout>
         <GridView
             android:id="@+id/shop_view_gvYardage"
             android:layout_width="match_parent"

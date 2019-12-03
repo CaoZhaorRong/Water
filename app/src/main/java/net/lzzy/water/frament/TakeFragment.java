@@ -1,12 +1,18 @@
 package net.lzzy.water.frament;
 
 
+import android.content.Context;
+import android.os.Bundle;
 import android.os.Message;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+
+import com.hjq.toast.ToastUtils;
 import com.squareup.picasso.Picasso;
+
 import net.lzzy.sqllib.GenericAdapter;
 import net.lzzy.sqllib.ViewHolder;
 import net.lzzy.water.R;
@@ -17,20 +23,27 @@ import net.lzzy.water.network.OrderService;
 import net.lzzy.water.utils.AbstractStaticHandler;
 import net.lzzy.water.utils.AppUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 
-
+/**
+ * @author 菜鸡
+ */
 public class TakeFragment extends BaseFragment {
 
-
+    private EvaluateFragment.OnGoToEvaluateActivity listener;
+    private static final int WHAT_TAKE = 1;
+    private Order evaluate;
     public TakeFragment() {
     }
-
     @Override
     protected void populate() {
         intiView();
+
     }
 
     private static final int WHAT_ORDER = 0;
@@ -39,8 +52,8 @@ public class TakeFragment extends BaseFragment {
     private ListView lv;
     private ThreadPoolExecutor executor = AppUtils.getExecutor();
     private FragmentHandler handler = new FragmentHandler(this);
-    private static class FragmentHandler extends AbstractStaticHandler<TakeFragment> {
 
+    private static class FragmentHandler extends AbstractStaticHandler<TakeFragment> {
 
         private FragmentHandler(TakeFragment context) {
             super(context);
@@ -53,8 +66,24 @@ public class TakeFragment extends BaseFragment {
                     String data = String.valueOf(msg.obj);
                     try {
                         List<Order> orders = OrderService.getOrders(data);
-                        fragment.show(orders);
+                        if (orders != null && orders.size() > 0) {
+                            fragment.show(orders);
+                        }
                     } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case WHAT_TAKE:
+                    String json = String.valueOf(msg.obj);
+                    try {
+                        JSONObject object = new JSONObject(json);
+                        boolean flag = object.getBoolean("flag");
+                        if (flag){
+                            ToastUtils.show("收货成功");
+                            fragment.getOrder();
+                            fragment.listener.onGoToEvaluateActivity(fragment.evaluate);
+                        }
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     break;
@@ -77,56 +106,83 @@ public class TakeFragment extends BaseFragment {
                 tvHint.setText("等待收货");
                 TextView tvObligation = holder.getView(R.id.fragment_btn);
                 tvObligation.setText("确认收货");
-                tvObligation.setOnClickListener(view ->
-                        Toast.makeText(getContext(),"gg",Toast.LENGTH_SHORT).show());
+                tvObligation.setOnClickListener(view -> {
+                    take(order);
+                });
             }
-
             @Override
-            public boolean persistInsert(Order order) {
+            public boolean persistInsert (Order order){
                 return false;
             }
 
             @Override
-            public boolean persistDelete(Order order) {
+            public boolean persistDelete (Order order){
                 return false;
             }
-        };
+        }
+
+        ;
         lv.setAdapter(adapter);
     }
 
+    private void take(Order order) {
+            executor.execute(()-> {
+                try {
+                    String json = OrderService.updateState(order.getOid(),3);
+                    evaluate = order;
+                    handler.sendMessage(handler.obtainMessage(WHAT_TAKE, json));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+    }
+
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint ( boolean isVisibleToUser){
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            user = AppUtils.getUser();
-            if (user != null) {
                 executor.execute(this::getOrder);
+        }
+    }
+
+    private void getOrder () {
+        user = AppUtils.getUser();
+        if (user != null) {
+            try {
+                String json = OrderService.getState(user.getUid(), 2);
+                handler.sendMessage(handler.obtainMessage(WHAT_ORDER, json));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
         }
     }
 
-    private void getOrder() {
-        try {
-            String json = OrderService.getState(user.getUid(), 2);
-            handler.sendMessage(handler.obtainMessage(WHAT_ORDER, json));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void intiView() {
+    private void intiView () {
         lv = findViewById(R.id.take_iv);
     }
+
     @Override
-    public int getLayout() {
+    public int getLayout () {
         return R.layout.fragment_take;
     }
 
     @Override
-    public void search(String kw) {
+    public void search (String kw){
 
     }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof EvaluateFragment.OnGoToEvaluateActivity) {
+            listener = (EvaluateFragment.OnGoToEvaluateActivity) context;
+        }
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 
 }
+

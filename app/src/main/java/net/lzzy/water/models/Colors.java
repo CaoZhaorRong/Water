@@ -1,14 +1,36 @@
 package net.lzzy.water.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import net.lzzy.sqllib.Jsonable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Colors implements Jsonable {
+public class Colors implements Jsonable , Parcelable {
     private String id;
     private  String colors;
     private String pid;
+
+    public  Colors(){}
+    protected Colors(Parcel in) {
+        id = in.readString();
+        colors = in.readString();
+        pid = in.readString();
+    }
+
+    public static final Creator<Colors> CREATOR = new Creator<Colors>() {
+        @Override
+        public Colors createFromParcel(Parcel in) {
+            return new Colors(in);
+        }
+
+        @Override
+        public Colors[] newArray(int size) {
+            return new Colors[size];
+        }
+    };
 
     public String getPid() {
         return pid;
@@ -39,5 +61,17 @@ public class Colors implements Jsonable {
         id = object.getString("id");
         pid = object.getString("pid");
         colors = object.getString("colors");
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(colors);
+        parcel.writeString(pid);
     }
 }

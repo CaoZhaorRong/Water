@@ -10,6 +10,8 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.util.Pair;
 
+import com.hjq.toast.ToastUtils;
+
 import net.lzzy.water.frament.OwnFragment;
 import net.lzzy.water.models.User;
 
@@ -64,6 +66,8 @@ public class AppUtils extends Application {
     public void onCreate() {
         super.onCreate();
         wContext = new WeakReference<>(this);
+        ToastUtils.init(this);
+
     }
     public static Context getContext() {
         return wContext.get();

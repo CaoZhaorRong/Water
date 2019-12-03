@@ -14,7 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activites.OrderActivity"></activity>
+        <activity android:name=".activites.SearchActivity"></activity>
+        <activity android:name=".activites.LocationActivity" />
+        <activity android:name=".activites.OrderItemActivity" />
+        <activity android:name=".activites.LoginActivity" />
+        <activity android:name=".activites.SubmitActivity" />
+        <activity android:name=".activites.BuyActivity" />
+        <activity android:name=".activites.EvaluateActivity" />
+        <activity android:name=".activites.OrderActivity" />
         <activity android:name=".activites.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

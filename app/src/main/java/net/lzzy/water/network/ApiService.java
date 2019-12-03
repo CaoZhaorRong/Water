@@ -3,6 +3,7 @@ package net.lzzy.water.network;
 
 import android.text.TextUtils;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -140,6 +141,20 @@ public class ApiService {
     }
 
     public static int okPost(String address, JSONObject json) throws IOException {
+        //请求体
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                json.toString());
+        Request request = new Request.Builder()
+                .url(address)
+                .post(requestBody)
+                .build();
+        try(Response response = CLIENT.newCall(request).execute()){
+            return response.code();
+        }
+    }
+
+
+    public static int okPost(String address, JSONArray json) throws IOException {
         //请求体
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
                 json.toString());

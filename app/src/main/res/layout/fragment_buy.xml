@@ -55,10 +55,19 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:orientation="vertical">
+
+
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/activity_pager"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="250dp" />
                         <com.youth.banner.Banner
                             android:id="@+id/fragment_buy_banner"
                             android:layout_width="match_parent"
-                            android:layout_height="300dp"/>
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerInside"
+                            android:layout_height="400dp"/>
                         <TextView
                             android:id="@+id/fragment_buy_name"
                             android:layout_width="match_parent"

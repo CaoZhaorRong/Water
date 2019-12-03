@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/l_back"
+            android:layout_width="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:src="@drawable/back"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="添加收货地址"/>
+        <TextView
+            android:id="@+id/l_save"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:text="保存"/>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/l_username"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@null"
+        android:hint="收货人"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorWhite"/>
+    <EditText
+        android:id="@+id/l_phone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@null"
+        android:hint="手机号码"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorWhite"/>
+
+    <EditText
+        android:id="@+id/l_locations"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:focusable="false"
+        android:background="@null"
+        android:hint="所在地区"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorWhite"/>
+    <EditText
+        android:id="@+id/l_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@null"
+        android:hint="详细地址：如道路、门牌号、小区、楼栋号、单元室等"/>
+</LinearLayout>

@@ -1,15 +1,21 @@
 package net.lzzy.water.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import net.lzzy.sqllib.Jsonable;
 import net.lzzy.water.network.OrderCartService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
+
 /**
  * @author 菜鸡
  */
-public class Order implements Jsonable {
+public class Order implements Jsonable , Parcelable {
 
     private String oid;
     //订单id
@@ -28,12 +34,62 @@ public class Order implements Jsonable {
     private  Product product;
     private String userId;
     private int count;
+    private String serial;
+    private  String cartId;
+
+    protected Order(Parcel in) {
+        oid = in.readString();
+        ordertime = in.readString();
+        if (in.readByte() == 0) {
+            total = null;
+        } else {
+            total = in.readDouble();
+        }
+        state = in.readInt();
+        address = in.readString();
+        name = in.readString();
+        telephone = in.readString();
+        product = in.readParcelable(Product.class.getClassLoader());
+        userId = in.readString();
+        count = in.readInt();
+        serial = in.readString();
+        cartId = in.readString();
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
+
+    public String getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
+    }
+
     public  Order(){}
 
-    //region
 
+//region
     public Product getProduct() {
         return product;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 
     public void setProduct(Product product) {
@@ -123,6 +179,10 @@ public class Order implements Jsonable {
         object.put("count",count);
         object.put("userId",userId);
         object.put("product",product.toJson());
+        object.put("ordertime",ordertime);
+        object.put("total",total);
+        object.put("serial",serial);
+        object.put("cartId",cartId);
         return object;
     }
 
@@ -136,6 +196,7 @@ public class Order implements Jsonable {
         name = object.getString("name");
         telephone = object.getString("telephone");
         count= object.getInt("count");
+        serial = object.getString("serial");
         try {
             setProduct(OrderCartService.getProduct(object.toString()));
         } catch (Exception e) {
@@ -143,4 +204,30 @@ public class Order implements Jsonable {
         }
     }
 
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(oid);
+        parcel.writeString(ordertime);
+        if (total == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(total);
+        }
+        parcel.writeInt(state);
+        parcel.writeString(address);
+        parcel.writeString(name);
+        parcel.writeString(telephone);
+        parcel.writeParcelable(product, i);
+        parcel.writeString(userId);
+        parcel.writeInt(count);
+        parcel.writeString(serial);
+        parcel.writeString(cartId);
+    }
 }

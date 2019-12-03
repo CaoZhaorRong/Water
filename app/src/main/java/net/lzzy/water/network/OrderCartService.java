@@ -19,7 +19,10 @@ import java.util.List;
  */
 public class OrderCartService {
 
-    private static String proJson;
+    public static String updateCount(int count,String id,String pid) throws IOException {
+        String address = ApiConstants.UPDATE_COUNT.concat(String.valueOf(count)).concat("/").concat(id).concat("/").concat(pid);
+        return ApiService.okGet(address);
+    }
 
     public static int postCartJson(OrderCart orderCart) throws IOException, JSONException {
         String address = ApiConstants.POST_CART;

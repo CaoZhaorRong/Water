@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/activity_back"
+            android:layout_width="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/back"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="15dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:text="发表评价"/>
+        <TextView
+            android:id="@+id/activity_e_publish"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#EFCB3B"
+            android:text="发布"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/activity_e_imgCover"
+            android:layout_width="40dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_height="40dp"/>
+        <TextView
+            android:id="@+id/activity_e_name"
+            android:layout_width="match_parent"
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#cccccc"/>
+    <RatingBar
+        android:id="@+id/ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="2dp"
+        android:numStars="5"
+        style="@style/mRatingBar"
+        android:stepSize="1" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
+        <EditText
+            android:id="@+id/activity_e_edit"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:layout_marginStart="8dp"
+            android:textSize="13sp"
+            android:hint="已经用了一段时间了，有更多宝贝使用心得？分享给想买的他们吧"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/colorWhite"/>
+
+
+</LinearLayout>

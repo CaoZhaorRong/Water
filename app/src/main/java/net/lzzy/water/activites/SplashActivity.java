@@ -32,14 +32,10 @@ public class SplashActivity extends AppCompatActivity {
     private static final int WHAT_COUNTING = 1;
     private static final int WHAT_EXCEPTION = 2;
     private static final int WHAT_COUNT_DONE = 3;
-    private static final int WHAT_CATEGORY = 4;
     public static final int WHAT_SERVER_OFF = 6;
-    private static final int WHAT_C_EXCEPTION = 5;
-    public static final String RESULT_CATEGORIES = "categories";
-    private int seconds = 5;
+    private int seconds = 3;
     private TextView tvCount;
     private boolean isServerOn = true;
-    private List<Category> categories =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         AppUtils.addActivity(this);
         intiView();
-        //executor.execute(this::detectServerStatus);
+        executor.execute(this::detectServerStatus);
         executor.execute(this::couDown);
     }
     private ThreadPoolExecutor executor = AppUtils.getExecutor();
@@ -72,6 +68,7 @@ public class SplashActivity extends AppCompatActivity {
                             .setMessage(msg.obj.toString())
                             .setPositiveButton("继续", (dialog, which) -> activity.gotoMain())
                             .setNegativeButton("退出", (dialog, which) -> AppUtils.exit())
+                            .setCancelable(false)
                             .show();
                     break;
                 case WHAT_COUNT_DONE:
@@ -80,12 +77,12 @@ public class SplashActivity extends AppCompatActivity {
                     }
                     break;
                 case WHAT_SERVER_OFF:
-                    //region 处理消息
                     Activity context = AppUtils.getRunningActivity();
                     new AlertDialog.Builder(context)
                             .setMessage("服务器没有响应，是否继续\n" + msg.obj)
                             .setNegativeButton("退出", (dialog, which) -> AppUtils.exit())
-                            .setNeutralButton("设置", (dialog, which) -> ViewUtils.goSetting(context))
+                            .setNeutralButton("设置", (dialog, which) -> ViewUtils.goSetting(context,false))
+                            .setCancelable(false)
                             .show();
                     break;
                     default:
@@ -113,7 +110,6 @@ public class SplashActivity extends AppCompatActivity {
     }
     public void gotoMain() {
         Intent intent=new Intent(this, MainActivity.class);
-        intent.putParcelableArrayListExtra(RESULT_CATEGORIES, (ArrayList<? extends Parcelable>) categories);
         startActivity(intent);
         finish();
     }

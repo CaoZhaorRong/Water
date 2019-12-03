@@ -3,11 +3,15 @@ package net.lzzy.water.activites;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +21,7 @@ import net.lzzy.water.frament.EvaluateFragment;
 import net.lzzy.water.frament.ObligationFragment;
 import net.lzzy.water.frament.ShipmentsFragment;
 import net.lzzy.water.frament.TakeFragment;
+import net.lzzy.water.models.Order;
 import net.lzzy.water.utils.StaticViewPager;
 
 import java.util.ArrayList;
@@ -27,16 +32,20 @@ import static net.lzzy.water.activites.MainActivity.RESULT_INDEX;
 /**
  * @author 菜鸡
  */
-public class OrderActivity extends AppCompatActivity implements View.OnClickListener {
+public class OrderActivity extends AppCompatActivity implements View.OnClickListener, EvaluateFragment.OnGoToEvaluateActivity {
+    public static final String RESULT_O = "result_o";
+    public static final String AD_DOWNLOAD_ACTION = "0";
     private StaticViewPager pager;
     private List<Fragment> fragments;
     private int[] tabIds = {R.id.o_tab0, R.id.o_tab1, R.id.o_tab2,R.id.o_tab3,R.id.o_tab4};
     private int index;
-    private TextView tab0;
-    private TextView tab1;
-    private TextView tab2;
-    private TextView tab3;
-    private TextView tab4;
+    private FrameLayout tab0;
+    private FrameLayout tab1;
+    private FrameLayout tab2;
+    private FrameLayout tab3;
+    private FrameLayout tab4;
+    private List<View> views;
+    private List<TextView> textViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +54,6 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_order);
         index = getIntent().getIntExtra(RESULT_INDEX,0);
         pagers();
-        pager.setCurrentItem(index);
         initView();
     }
 
@@ -61,7 +69,35 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         tab2.setOnClickListener(view -> pager.setCurrentItem(2));
         tab3.setOnClickListener(view -> pager.setCurrentItem(3));
         tab4.setOnClickListener(view -> pager.setCurrentItem(4));
-        back.setOnClickListener(view -> onBackPressed());
+        TextView tvOne = findViewById(R.id.tv_one);
+        TextView tvTow = findViewById(R.id.tv_tow);
+        TextView tvThree = findViewById(R.id.tv_three);
+        TextView tvFour = findViewById(R.id.tv_four);
+        TextView tvFive = findViewById(R.id.tv_five);
+        View vOne = findViewById(R.id.v_one);
+        View vTow = findViewById(R.id.v_tow);
+        View vThree = findViewById(R.id.v_three);
+        View vFour = findViewById(R.id.v_four);
+        View vFive = findViewById(R.id.v_five);
+        views = new ArrayList<>();
+        views.add(0,vOne);
+        views.add(1,vTow);
+        views.add(2,vThree);
+        views.add(3,vFour);
+        views.add(4,vFive);
+        textViews = new  ArrayList<>();
+        textViews.add(0,tvOne);
+        textViews.add(1,tvTow);
+        textViews.add(2,tvThree);
+        textViews.add(3,tvFour);
+        textViews.add(4,tvFive);
+        back.setOnClickListener(view -> {
+            onBackPressed();
+            Intent intent = new Intent(AD_DOWNLOAD_ACTION);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        });
+        selectTv(index);
+        selectTab(tabIds[index]);
     }
     private void pagers() {
         fragments = new ArrayList<>();
@@ -90,6 +126,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onPageSelected(int i) {
                 selectTab(tabIds[i]);
+                selectTv(i);
             }
 
             @Override
@@ -101,6 +138,22 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         pager.setOffscreenPageLimit(fragments.size());
         pager.setPageMargin(40);
         fragmentStatePagerAdapter.notifyDataSetChanged();
+    }
+    private void selectTv(int tvIds){
+        for (int i = 0;i<textViews.size();i++){
+            if (i == tvIds){
+                textViews.get(i).setTextColor(this.getColor(R.color.colorAccent));
+            }else {
+                textViews.get(i).setTextColor(this.getColor(R.color.colorBlack));
+            }
+        }
+        for (int i = 0;i<views.size();i++){
+            if (i == tvIds){
+                views.get(i).setBackgroundColor(Color.BLUE);
+            }else {
+                views.get(i).setBackgroundColor(Color.WHITE);
+            }
+        }
     }
     private void selectTab(int tabId) {
         switch (tabId) {
@@ -127,4 +180,12 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         selectTab(view.getId());
     }
+
+    @Override
+    public void onGoToEvaluateActivity(Order order) {
+        Intent intent=new Intent(this, EvaluateActivity.class);
+        intent.putExtra(RESULT_O,order);
+        startActivity(intent);
+    }
+
 }

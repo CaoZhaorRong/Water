@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <FrameLayout
-        android:id="@+id/fragment_main"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,12 +13,25 @@
             android:clipChildren="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+      <!--  <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:alpha="0.3"
+            android:background="@color/colorBabyBlue"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:text="去登陆发现更多精彩"/>
+        </FrameLayout>-->
     </FrameLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="#cccccc" />
-
     <LinearLayout
         android:id="@+id/activity_main_fundus"
         android:layout_width="match_parent"
